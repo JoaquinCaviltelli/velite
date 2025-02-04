@@ -13,7 +13,7 @@ const Navbar = () => {
       <div className="flex items-center">
       
 
-        <img  src="/logo.png" alt="Logo" className="h-14" />
+        <img  src="/logo.png" alt="Logo" className="lg:h-14 h-10" />
         
       </div>
       {/* Botón de menú para móvil */}
