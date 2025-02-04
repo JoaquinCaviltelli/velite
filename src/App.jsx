@@ -1,11 +1,31 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css"; // Estilos de AOS
 import Navbar from "/src/components/Navbar";
 import SocialLinks from "/src/components/SocialLinks";
 import Button from "/src/components/Button";
+import bgMobile from '/public/bgMobile.webp';
+import bgDesktop from '/public/bgDesktop.webp';
 
 function App() {
+  const [bgImage, setBgImage] = useState(bgMobile); // Asumiendo que bgMobile es la imagen para móviles
+  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
+
+  // Calcular altura de la ventana
+  useEffect(() => {
+    const updateHeight = () => {
+      setWindowHeight(window.innerHeight); // Actualizar altura
+    };
+
+    // Escuchar cambios en el tamaño de la ventana
+    window.addEventListener("resize", updateHeight);
+
+    // Limpiar el evento al desmontar el componente
+    return () => {
+      window.removeEventListener("resize", updateHeight);
+    };
+  }, []);
+
   // Inicializa AOS
   AOS.init({
     duration: 1000, // Duración de la animación
@@ -22,18 +42,37 @@ function App() {
     window.open(url, "_blank");
   };
 
+  useEffect(() => {
+    const updateBgImage = () => {
+      if (window.innerWidth >= 768) {
+        setBgImage(bgDesktop); // Cambiar a la imagen de fondo para escritorio
+      } else {
+        setBgImage(bgMobile); // Volver a la imagen de fondo para móviles
+      }
+    };
+
+    updateBgImage(); // Llamar a la función inicialmente
+
+    window.addEventListener('resize', updateBgImage); // Cambiar la imagen cuando el tamaño cambie
+    return () => window.removeEventListener('resize', updateBgImage); // Limpiar el evento
+  }, []);
+
   return (
     <div>
       {/* Sección 1 */}
       <section
         id="/"
-        className="relative h-screen bg-cover bg-left bg-[url('/public/bgMobile.jpg')] lg:bg-[url('/public/bgMain.jpg')]"
+        className="relative bg-cover bg-left"
+        style={{
+          backgroundImage: `url(${bgImage})`,
+          height: `${windowHeight}px`, // Usamos la altura dinámica aquí
+        }}
       >
         <div className="absolute inset-0 bg-black opacity-50"></div>
         <div className="absolute inset-0 flex flex-col justify-between text-white w-full max-w-7xl mx-auto p-6">
           <Navbar />
           <div className="md:max-w-3xl max-w-xl">
-            <h1  className="text-5xl md:text-6xl font-[800] lg:mb-6 mb-3">
+            <h1 className="text-5xl md:text-6xl font-[800] lg:mb-6 mb-3">
               Optimiza el transporte de tus cargas
             </h1>
             <p className="lg:text-xl mb-16">
@@ -56,32 +95,31 @@ function App() {
       >
         <div className="container mx-auto grid grid-cols-12 gap-3 max-w-7xl w-full p-6 overflow-hidden">
           <div
-            
             className="lg:col-span-6 md:col-span-7 col-span-12 sm:mr-20"
           >
             <h2 className="lg:text-4xl text-3xl font-[800] mb-8 text-[#014034]" data-aos="fade-right"
-            data-aos-anchor-placement="bottom-bottom">
+              data-aos-anchor-placement="bottom-bottom">
               Descubrí el poder del Apilador Eléctrico Autocargable Velite®
             </h2>
             <p className="text-[#999999] mb-8" data-aos="fade-right"
-            data-aos-anchor-placement="bottom-bottom">
+              data-aos-anchor-placement="bottom-bottom">
               Mueve tus cargas con eficiencia y confianza. Llévalo donde lo
               necesites junto con tu carga.
             </p>
             <div data-aos="fade-right"
-            data-aos-anchor-placement="bottom-bottom">
+              data-aos-anchor-placement="bottom-bottom">
 
-            <Button
-              onClick={openWhatsApp}
-              text="Quiero mi apilador"
-              className="hidden md:block lg:mb-28 mb-10"
+              <Button
+                onClick={openWhatsApp}
+                text="Quiero mi apilador"
+                className="hidden md:block lg:mb-28 mb-10"
               />
-              </div>
+            </div>
           </div>
-          <div  className="lg:col-span-6 md:col-span-5 col-span-12 max-w-xl">
+          <div className="lg:col-span-6 md:col-span-5 col-span-12 max-w-xl">
             <iframe
-            data-aos="fade-left"
-            data-aos-anchor-placement="bottom-bottom"
+              data-aos="fade-left"
+              data-aos-anchor-placement="bottom-bottom"
               className="video rounded-lg"
               src="https://www.youtube.com/embed/YcmrFzPNGmY?autoplay=1&mute=1&loop=1&playlist=YcmrFzPNGmY&controls=0"
               title="YouTube video player"
@@ -104,7 +142,7 @@ function App() {
         id="contacto"
         className="bg-[#EEEEEE] h-screen w-full flex flex-col text-center justify-between"
       >
-        <div className="container mx-auto text-center h-full flex flex-col justify-center items-center p-6 " >
+        <div className="container mx-auto text-center h-full flex flex-col justify-center items-center p-6">
           <h2 className="lg:text-4xl text-3xl font-[800] mb-8 text-[#014034] max-w-xl" data-aos="fade-up"
             data-aos-anchor-placement="bottom-bottom">
             Sé el próximo en tener el Apilador Velite
@@ -117,8 +155,7 @@ function App() {
           </p>
           <div data-aos="fade-up"
             data-aos-anchor-placement="bottom-bottom">
-
-          <Button  text="Más Información" className="md:max-w-xs" />
+            <Button text="Más Información" className="md:max-w-xs" />
           </div>
         </div>
 
