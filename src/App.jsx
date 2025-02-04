@@ -131,11 +131,15 @@ function App() {
               referrerPolicy="strict-origin-when-cross-origin"
               allowFullScreen
             ></iframe>
+            <div data-aos="fade-left"
+              data-aos-anchor-placement="bottom-bottom">
+
             <Button
               onClick={openWhatsApp}
               text="Quiero mi apilador"
               className="md:hidden mt-8 w-full"
-            />
+              />
+              </div>
           </div>
         </div>
       </section>
