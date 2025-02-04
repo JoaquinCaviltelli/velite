@@ -1,0 +1,14 @@
+@import "tailwindcss";
+@import 'font-awesome/css/font-awesome.min.css';
+
+*{
+  font-family: "Montserrat", serif;
+}
+
+.video{
+  width: 100%;
+  aspect-ratio: 2 / 1.13
+}
+html {
+  scroll-behavior: smooth;
+}
