@@ -91,7 +91,10 @@ function App() {
       {/* Sección 2 */}
       <section
         id="apilador-electrico"
-        className="bg-white h-screen w-full flex justify-center items-center"
+        className="bg-white w-full flex justify-center items-center"
+        style={{
+          height: `${windowHeight}px`, // Usamos la altura dinámica aquí
+        }}
       >
         <div className="container mx-auto grid grid-cols-12 gap-3 max-w-7xl w-full p-6 overflow-hidden">
           <div
@@ -140,7 +143,10 @@ function App() {
       {/* Sección 3 */}
       <section
         id="contacto"
-        className="bg-[#EEEEEE] h-screen w-full flex flex-col text-center justify-between"
+        className="bg-[#EEEEEE] w-full flex flex-col text-center justify-between"
+        style={{
+          height: `${windowHeight}px`, // Usamos la altura dinámica aquí
+        }}
       >
         <div className="container mx-auto text-center h-full flex flex-col justify-center items-center p-6">
           <h2 className="lg:text-4xl text-3xl font-[800] mb-8 text-[#014034] max-w-xl" data-aos="fade-up"
