@@ -91,12 +91,12 @@ function App() {
       {/* Sección 2 */}
       <section
         id="apilador-electrico"
-        className="bg-white w-full flex justify-center items-center"
+        className="bg-white w-full flex justify-center items-center overflow-hidden"
         style={{
           height: `${windowHeight}px`, // Usamos la altura dinámica aquí
         }}
       >
-        <div className="container mx-auto grid grid-cols-12 gap-3 max-w-7xl w-full p-6 overflow-hidden">
+        <div className="container mx-auto grid grid-cols-12 gap-3 w-full p-6 ">
           <div
             className="lg:col-span-6 md:col-span-7 col-span-12 sm:mr-20"
           >
@@ -123,7 +123,7 @@ function App() {
             <iframe
               data-aos="fade-left"
               data-aos-anchor-placement="bottom-bottom"
-              className="video rounded-lg"
+              className="video rounded-lg bg-cover"
               src="https://www.youtube.com/embed/YcmrFzPNGmY?autoplay=1&mute=1&loop=1&playlist=YcmrFzPNGmY&controls=0"
               title="YouTube video player"
               frameBorder="0"
@@ -160,8 +160,8 @@ function App() {
             manera de trabajar de las empresas que transportan cargas.
           </p>
           <div data-aos="fade-up"
-            data-aos-anchor-placement="bottom-bottom">
-            <Button text="Más Información" className="md:max-w-xs" />
+            data-aos-anchor-placement="bottom-bottom" className="w-full">
+            <Button text="Contactar ahora" onClick={openWhatsApp} />
           </div>
         </div>
 
