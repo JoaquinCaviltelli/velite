@@ -4,8 +4,8 @@ import "aos/dist/aos.css";
 import Navbar from "/src/components/Navbar";
 import SocialLinks from "/src/components/SocialLinks";
 import Button from "/src/components/Button";
-import bgMobile from "/public/assets/bgMobile.webp";
-import bgDesktop from "/public/assets/bgDesktop.webp";
+import bgMobile from "/public/assets/bgMobile_11zon.webp";
+import bgDesktop from "/public/assets/bgDesktop_11zon.webp";
 import video from "/public/assets/2e4dc237951972f429efee418b7488d6064c1b26.mp4";
 
 function App() {
