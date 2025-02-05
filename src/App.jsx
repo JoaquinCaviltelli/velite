@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Navbar from "/src/components/Navbar";
@@ -12,6 +12,7 @@ function App() {
   const [bgImage, setBgImage] = useState(bgMobile);
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
   const [imageLoaded, setImageLoaded] = useState(false);
+  const videoRef = useRef(null); // Crear la referencia para el video
 
   const estilosh2 = "lg:text-4xl text-3xl font-[800] mb-8 text-[#014034]";
   const estilosp = "text-[#999999] mb-8";
@@ -27,7 +28,6 @@ function App() {
     };
   }, []);
 
-  
   useEffect(() => {
     AOS.init({
       duration: 1000,
@@ -45,7 +45,6 @@ function App() {
     window.open(url, "_blank");
   };
 
-
   useEffect(() => {
     const updateBgImage = () => {
       if (window.innerWidth >= 768) {
@@ -55,12 +54,11 @@ function App() {
       }
     };
 
-    updateBgImage(); 
+    updateBgImage();
 
     window.addEventListener("resize", updateBgImage);
-    return () => window.removeEventListener("resize", updateBgImage); 
+    return () => window.removeEventListener("resize", updateBgImage);
   }, []);
-
 
   useEffect(() => {
     const img = new Image();
@@ -70,6 +68,19 @@ function App() {
     };
   }, [bgImage]);
 
+  const handleFullScreen = () => {
+    if (videoRef.current) {
+      if (videoRef.current.requestFullscreen) {
+        videoRef.current.requestFullscreen();
+      } else if (videoRef.current.mozRequestFullScreen) { // Firefox
+        videoRef.current.mozRequestFullScreen();
+      } else if (videoRef.current.webkitRequestFullscreen) { // Chrome, Safari and Opera
+        videoRef.current.webkitRequestFullscreen();
+      } else if (videoRef.current.msRequestFullscreen) { // IE/Edge
+        videoRef.current.msRequestFullscreen();
+      }
+    }
+  };
 
   if (!imageLoaded) {
     return null;
@@ -83,7 +94,7 @@ function App() {
         className="relative bg-cover bg-left"
         style={{
           backgroundImage: `url(${bgImage})`,
-          height: `${windowHeight}px`, 
+          height: `${windowHeight}px`,
         }}
         loading="lazy"
       >
@@ -112,10 +123,10 @@ function App() {
         id="apilador-electrico"
         className="bg-white w-full  overflow-hidden"
         style={{
-          height: `${windowHeight}px`, 
+          height: `${windowHeight}px`,
         }}
       >
-        <div className="container mx-auto flex items-center justify-center h-full md:gap-20 w-full   max-w-7xl  md:items-center p-6 md:flex-row flex-col">
+        <div className="container mx-auto flex items-center justify-center h-full md:gap-20 w-full max-w-7xl md:items-center p-6 md:flex-row flex-col">
           <div className="flex flex-col w-full max-w-xl mx-auto">
             <h2
               className={estilosh2}
@@ -145,18 +156,8 @@ function App() {
             </div>
           </div>
           <div className="w-full max-w-xl mx-auto">
-            {/* <iframe
-              data-aos="fade-left"
-              data-aos-anchor-placement="bottom-bottom"
-              className="video rounded-lg bg-cover"
-              src="https://www.youtube.com/embed/YcmrFzPNGmY?autoplay=1&mute=1&loop=1&playlist=YcmrFzPNGmY&controls=0"
-              title="YouTube video player"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-            ></iframe> */}
             <video
+              ref={videoRef} // Asignamos la referencia aquí
               data-aos="fade-left"
               data-aos-anchor-placement="bottom-bottom"
               className="video rounded-lg bg-cover"
@@ -164,10 +165,9 @@ function App() {
               muted
               loop
               playsInline
+              onClick={handleFullScreen} // Añadimos el manejador de click
             >
-              
               <source src={video} type="video/mp4" />
-              
               Tu navegador no soporta el formato de video.
             </video>
 
@@ -191,7 +191,7 @@ function App() {
         id="contacto"
         className="bg-[#EEEEEE] w-full flex flex-col text-center justify-between"
         style={{
-          height: `${windowHeight}px`, 
+          height: `${windowHeight}px`,
         }}
       >
         <div className="container mx-auto text-center h-full flex flex-col justify-center items-center p-6 max-w-xl">
