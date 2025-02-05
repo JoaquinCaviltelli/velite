@@ -9,8 +9,9 @@ import bgDesktop from "/public/assets/bgDesktop_11zon.webp";
 import video from "/public/assets/2e4dc237951972f429efee418b7488d6064c1b26.mp4";
 
 function App() {
-  const [bgImage, setBgImage] = useState();
+  const [bgImage, setBgImage] = useState(bgMobile);
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   const estilosh2 = "lg:text-4xl text-3xl font-[800] mb-8 text-[#014034]";
   const estilosp = "text-[#999999] mb-8";
@@ -61,23 +62,32 @@ function App() {
   }, []);
 
 
+  useEffect(() => {
+    const img = new Image();
+    img.src = bgImage;
+    img.onload = () => {
+      setImageLoaded(true);
+    };
+  }, [bgImage]);
 
 
-
+  if (!imageLoaded) {
+    return null;
+  }
 
   return (
     <div>
       {/* Sección 1 */}
       <section
         id="/"
-        className="relative  bg-cover bg-left"
+        className="relative bg-cover bg-left"
         style={{
           backgroundImage: `url(${bgImage})`,
           height: `${windowHeight}px`, 
         }}
       >
         <div className="absolute inset-0 bg-black opacity-50"></div>
-        <div className="absolute inset-0 flex flex-col justify-between text-white w-full max-w-7xl mx-auto p-6 ">
+        <div className="absolute inset-0 flex flex-col justify-between text-white w-full max-w-7xl mx-auto p-6">
           <Navbar />
           <div className="md:max-w-3xl max-w-xl">
             <h1 className="text-5xl md:text-6xl font-[800] lg:mb-6 mb-6">
@@ -146,7 +156,6 @@ function App() {
               allowFullScreen
             ></iframe> */}
             <video
-              preload="auto"
               data-aos="fade-left"
               data-aos-anchor-placement="bottom-bottom"
               className="video rounded-lg bg-cover"
