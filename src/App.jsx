@@ -46,22 +46,7 @@ function App() {
   };
 
 
-  useEffect(() => {
-    const updateBgImage = () => {
-      if (window.innerWidth >= 768) {
-        setBgImage(bgDesktop);
-      } else {
-        setBgImage(bgMobile);
-      }
-    };
-
-    updateBgImage(); 
-
-    window.addEventListener("resize", updateBgImage);
-    return () => window.removeEventListener("resize", updateBgImage); 
-  }, []);
-
-
+  // Pre-cargar la imagen de fondo
   useEffect(() => {
     const img = new Image();
     img.src = bgImage;
@@ -70,9 +55,30 @@ function App() {
     };
   }, [bgImage]);
 
+  // Cambiar la imagen de fondo según el tamaño de la ventana
+  useEffect(() => {
+    const updateBgImage = () => {
+      const newBgImage = window.innerWidth >= 768 ? bgDesktop : bgMobile;
+      setBgImage(newBgImage);
 
+      // Pre-cargar la nueva imagen
+      const img = new Image();
+      img.src = newBgImage;
+    };
+
+    updateBgImage(); // Ejecutar la carga inicial
+    window.addEventListener("resize", updateBgImage);
+    return () => window.removeEventListener("resize", updateBgImage);
+  }, []);
+
+  // Si la imagen aún no se ha cargado, mostrar un color de fondo simple o un placeholder
   if (!imageLoaded) {
-    return null;
+    return (
+      <div>
+        {/* Placeholder mientras la imagen no se ha cargado */}
+        <div className="bg-gray-300" style={{ height: `${windowHeight}px` }}></div>
+      </div>
+    );
   }
 
   return (
