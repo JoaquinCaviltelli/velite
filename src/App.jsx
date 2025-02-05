@@ -90,9 +90,7 @@ function App() {
         <div className="absolute inset-0 flex flex-col justify-between text-white w-full max-w-7xl mx-auto p-6">
           <Navbar />
           <div className="md:max-w-3xl max-w-xl">
-            <h1 className="text-5xl md:text-6xl font-[800] lg:mb-6 mb-6">
-              Optimiza el transporte de tus cargas
-            </h1>
+            
             <p className="lg:text-xl lg:mb-16 mb-6">
               Transporta el Apilador Eléctrico Autocargable junto con tu carga,
               y lleva la productividad al siguiente nivel.
