@@ -4,11 +4,14 @@ import "aos/dist/aos.css";
 import Navbar from "/src/components/Navbar";
 import SocialLinks from "/src/components/SocialLinks";
 import Button from "/src/components/Button";
+import bgMobile from "/public/assets/bgMobile_11zon.jpg";
 import bgDesktop from "/public/assets/bgDesktop.webp";
 import video from "/public/assets/2e4dc237951972f429efee418b7488d6064c1b26.mp4";
 
 function App() {
+  const [bgImage, setBgImage] = useState(bgMobile);
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   const estilosh2 = "lg:text-4xl text-3xl font-[800] mb-8 text-[#014034]";
   const estilosp = "text-[#999999] mb-8";
@@ -43,6 +46,35 @@ function App() {
   };
 
 
+  useEffect(() => {
+    const updateBgImage = () => {
+      if (window.innerWidth >= 768) {
+        setBgImage(bgDesktop);
+      } else {
+        setBgImage(bgMobile);
+      }
+    };
+
+    updateBgImage(); 
+
+    window.addEventListener("resize", updateBgImage);
+    return () => window.removeEventListener("resize", updateBgImage); 
+  }, []);
+
+
+  useEffect(() => {
+    const img = new Image();
+    img.src = bgImage;
+    img.onload = () => {
+      setImageLoaded(true);
+    };
+  }, [bgImage]);
+
+
+  if (!imageLoaded) {
+    return null;
+  }
+
   return (
     <div>
       {/* Sección 1 */}
@@ -50,7 +82,7 @@ function App() {
         id="/"
         className="relative bg-cover bg-left"
         style={{
-          backgroundImage: `url(${bgDesktop})`,
+          backgroundImage: `url(${bgImage})`,
           height: `${windowHeight}px`, 
         }}
         loading="lazy"
