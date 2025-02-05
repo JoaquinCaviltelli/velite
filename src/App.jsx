@@ -4,14 +4,11 @@ import "aos/dist/aos.css";
 import Navbar from "/src/components/Navbar";
 import SocialLinks from "/src/components/SocialLinks";
 import Button from "/src/components/Button";
-import bgMobile from "/public/assets/bgMobile_11zon.webp";
-import bgDesktop from "/public/assets/bgDesktop_11zon.webp";
+import bgDesktop from "/public/assets/bgDesktop.webp";
 import video from "/public/assets/2e4dc237951972f429efee418b7488d6064c1b26.mp4";
 
 function App() {
-  const [bgImage, setBgImage] = useState(bgMobile);
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
-  const [imageLoaded, setImageLoaded] = useState(false);
 
   const estilosh2 = "lg:text-4xl text-3xl font-[800] mb-8 text-[#014034]";
   const estilosp = "text-[#999999] mb-8";
@@ -46,41 +43,6 @@ function App() {
   };
 
 
-  // Pre-cargar la imagen de fondo
-  useEffect(() => {
-    const img = new Image();
-    img.src = bgImage;
-    img.onload = () => {
-      setImageLoaded(true);
-    };
-  }, [bgImage]);
-
-  // Cambiar la imagen de fondo según el tamaño de la ventana
-  useEffect(() => {
-    const updateBgImage = () => {
-      const newBgImage = window.innerWidth >= 768 ? bgDesktop : bgMobile;
-      setBgImage(newBgImage);
-
-      // Pre-cargar la nueva imagen
-      const img = new Image();
-      img.src = newBgImage;
-    };
-
-    updateBgImage(); // Ejecutar la carga inicial
-    window.addEventListener("resize", updateBgImage);
-    return () => window.removeEventListener("resize", updateBgImage);
-  }, []);
-
-  // Si la imagen aún no se ha cargado, mostrar un color de fondo simple o un placeholder
-  if (!imageLoaded) {
-    return (
-      <div>
-        {/* Placeholder mientras la imagen no se ha cargado */}
-        <div className="bg-gray-300" style={{ height: `${windowHeight}px` }}></div>
-      </div>
-    );
-  }
-
   return (
     <div>
       {/* Sección 1 */}
@@ -88,7 +50,7 @@ function App() {
         id="/"
         className="relative bg-cover bg-left"
         style={{
-          backgroundImage: `url(${bgImage})`,
+          backgroundImage: `url(${bgDesktop})`,
           height: `${windowHeight}px`, 
         }}
       >
