@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SocialLinks from "/src/components/SocialLinks";
+import logo from "/public/assets/logo.png";
 
 const Navbar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -8,25 +9,37 @@ const Navbar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
+  
+  useEffect(() => {
+    if (isSidebarOpen) {
+      document.body.style.overflow = "hidden"; 
+    } else {
+      document.body.style.overflow = "auto"; 
+    }
+
+
+    return () => {
+      document.body.style.overflow = "auto"; 
+    };
+  }, [isSidebarOpen]);
+
   return (
     <nav className="flex w-full justify-between items-center text-white">
       <div className="flex items-center">
-      
-
-        <img  src="/logo.png" alt="Logo" className="lg:h-14 h-9" />
-        
+        <img src={logo} alt="Logo" className="lg:h-14 h-9" />
       </div>
+
       {/* Botón de menú para móvil */}
       <button onClick={toggleSidebar} className="md:hidden p-2 text-white">
         <i className="fas fa-bars text-2xl"></i>
       </button>
+
       {/* Barra lateral */}
       <div
-        className={`fixed inset-0 md:hidden  ${
-          isSidebarOpen ? "block" : "hidden"
-        }`}
+        className={`fixed inset-0 md:hidden ${isSidebarOpen ? "block" : "hidden"}`}
         onClick={toggleSidebar}
       ></div>
+
       <div
         className={`fixed top-0 left-0 h-full bg-[#014034] text-white w-full p-6 transform transition-transform ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
@@ -38,23 +51,25 @@ const Navbar = () => {
           </button>
         </div>
         <div className="h-full flex flex-col justify-between">
-
-        <ul className="flex flex-col items-center space-y-4 uppercase font-semibold text-lg mt-20">
-          <li>
-            <a href="#apilador-electrico" onClick={toggleSidebar} className="text-white">
-              Apilador
-            </a>
-          </li>
-          <li>
-            <a href="#contacto" onClick={toggleSidebar} className="text-white">
-              Contacto
-            </a>
-          </li>
-        </ul>
-        <div className="scale-75 text-white">
-
-        <SocialLinks />
-        </div>
+          <ul className="flex flex-col items-center space-y-4 uppercase font-semibold text-lg mt-20">
+            <li>
+              <a
+                href="#apilador-electrico"
+                onClick={toggleSidebar}
+                className="text-white"
+              >
+                Apilador
+              </a>
+            </li>
+            <li>
+              <a href="#contacto" onClick={toggleSidebar} className="text-white">
+                Contacto
+              </a>
+            </li>
+          </ul>
+          <div className="scale-90 text-white">
+            <SocialLinks />
+          </div>
         </div>
       </div>
 

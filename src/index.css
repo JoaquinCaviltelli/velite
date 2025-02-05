@@ -3,11 +3,12 @@
 
 *{
   font-family: "Montserrat", serif;
+  user-select: none;
 }
 
 .video{
   width: 100%;
-  aspect-ratio: 16 / 9
+  aspect-ratio: 16 / 9;
 }
 html {
   scroll-behavior: smooth;

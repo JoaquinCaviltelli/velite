@@ -1,39 +1,42 @@
 import React, { useEffect, useState } from "react";
 import AOS from "aos";
-import "aos/dist/aos.css"; // Estilos de AOS
+import "aos/dist/aos.css";
 import Navbar from "/src/components/Navbar";
 import SocialLinks from "/src/components/SocialLinks";
 import Button from "/src/components/Button";
-import bgMobile from '/public/bgMobile.webp';
-import bgDesktop from '/public/bgDesktop.webp';
+import bgMobile from "/public/assets/bgMobile.webp";
+import bgDesktop from "/public/assets/bgDesktop.webp";
+import video from "/public/assets/2e4dc237951972f429efee418b7488d6064c1b26.mp4";
 
 function App() {
-  const [bgImage, setBgImage] = useState(bgMobile); // Asumiendo que bgMobile es la imagen para móviles
+  const [bgImage, setBgImage] = useState(bgMobile);
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  const estilosh2 = "lg:text-4xl text-3xl font-[800] mb-8 text-[#014034]";
+  const estilosp = "text-[#999999] mb-8";
 
   // Calcular altura de la ventana
   useEffect(() => {
     const updateHeight = () => {
-      setWindowHeight(window.innerHeight); // Actualizar altura
+      setWindowHeight(window.innerHeight);
     };
-
-    // Escuchar cambios en el tamaño de la ventana
     window.addEventListener("resize", updateHeight);
-
-    // Limpiar el evento al desmontar el componente
     return () => {
       window.removeEventListener("resize", updateHeight);
     };
   }, []);
 
-  // Inicializa AOS
-  AOS.init({
-    duration: 1000, // Duración de la animación
-    once: false, // La animación ocurre solo una vez
-  });
+  
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: false,
+    });
+  }, []);
 
   const openWhatsApp = () => {
-    const phoneNumber = "+5493534210360"; // Reemplázalo con tu número de teléfono
+    const phoneNumber = "+5493534210360";
     const message =
       "¡Hola! Estoy interesado en el apilador eléctrico autocargable VELITE.";
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
@@ -42,20 +45,35 @@ function App() {
     window.open(url, "_blank");
   };
 
+
   useEffect(() => {
     const updateBgImage = () => {
       if (window.innerWidth >= 768) {
-        setBgImage(bgDesktop); // Cambiar a la imagen de fondo para escritorio
+        setBgImage(bgDesktop);
       } else {
-        setBgImage(bgMobile); // Volver a la imagen de fondo para móviles
+        setBgImage(bgMobile);
       }
     };
 
-    updateBgImage(); // Llamar a la función inicialmente
+    updateBgImage(); 
 
-    window.addEventListener('resize', updateBgImage); // Cambiar la imagen cuando el tamaño cambie
-    return () => window.removeEventListener('resize', updateBgImage); // Limpiar el evento
+    window.addEventListener("resize", updateBgImage);
+    return () => window.removeEventListener("resize", updateBgImage); 
   }, []);
+
+
+  useEffect(() => {
+    const img = new Image();
+    img.src = bgImage;
+    img.onload = () => {
+      setImageLoaded(true);
+    };
+  }, [bgImage]);
+
+
+  if (!imageLoaded) {
+    return null;
+  }
 
   return (
     <div>
@@ -65,17 +83,17 @@ function App() {
         className="relative bg-cover bg-left"
         style={{
           backgroundImage: `url(${bgImage})`,
-          height: `${windowHeight}px`, // Usamos la altura dinámica aquí
+          height: `${windowHeight}px`, 
         }}
       >
         <div className="absolute inset-0 bg-black opacity-50"></div>
         <div className="absolute inset-0 flex flex-col justify-between text-white w-full max-w-7xl mx-auto p-6">
           <Navbar />
           <div className="md:max-w-3xl max-w-xl">
-            <h1 className="text-5xl md:text-6xl font-[800] lg:mb-6 mb-3">
+            <h1 className="text-5xl md:text-6xl font-[800] lg:mb-6 mb-6">
               Optimiza el transporte de tus cargas
             </h1>
-            <p className="lg:text-xl mb-16">
+            <p className="lg:text-xl lg:mb-16 mb-6">
               Transporta el Apilador Eléctrico Autocargable junto con tu carga,
               y lleva la productividad al siguiente nivel.
             </p>
@@ -91,36 +109,42 @@ function App() {
       {/* Sección 2 */}
       <section
         id="apilador-electrico"
-        className="bg-white w-full flex justify-center items-center overflow-hidden"
+        className="bg-white w-full  overflow-hidden"
         style={{
-          height: `${windowHeight}px`, // Usamos la altura dinámica aquí
+          height: `${windowHeight}px`, 
         }}
       >
-        <div className="container mx-auto grid grid-cols-12 gap-3 w-full p-6 ">
-          <div
-            className="lg:col-span-6 md:col-span-7 col-span-12 sm:mr-20"
-          >
-            <h2 className="lg:text-4xl text-3xl font-[800] mb-8 text-[#014034]" data-aos="fade-right"
-              data-aos-anchor-placement="bottom-bottom">
+        <div className="container mx-auto flex items-center justify-center h-full md:gap-20 w-full   max-w-7xl  md:items-center p-6 md:flex-row flex-col">
+          <div className="flex flex-col w-full max-w-xl mx-auto">
+            <h2
+              className={estilosh2}
+              data-aos="fade-right"
+              data-aos-anchor-placement="bottom-bottom"
+            >
               Descubrí el poder del Apilador Eléctrico Autocargable Velite®
             </h2>
-            <p className="text-[#999999] mb-8" data-aos="fade-right"
-              data-aos-anchor-placement="bottom-bottom">
+            <p
+              className={estilosp}
+              data-aos="fade-right"
+              data-aos-anchor-placement="bottom-bottom"
+            >
               Mueve tus cargas con eficiencia y confianza. Llévalo donde lo
               necesites junto con tu carga.
             </p>
-            <div data-aos="fade-right"
-              data-aos-anchor-placement="bottom-bottom">
-
+            <div
+              data-aos="fade-right"
+              data-aos-anchor-placement="bottom-bottom"
+              data-aos-delay="150"
+            >
               <Button
                 onClick={openWhatsApp}
                 text="Quiero mi apilador"
-                className="hidden md:block lg:mb-28 mb-10"
+                className="hidden md:block"
               />
             </div>
           </div>
-          <div className="lg:col-span-6 md:col-span-5 col-span-12 max-w-xl">
-            <iframe
+          <div className="w-full max-w-xl mx-auto">
+            {/* <iframe
               data-aos="fade-left"
               data-aos-anchor-placement="bottom-bottom"
               className="video rounded-lg bg-cover"
@@ -130,16 +154,31 @@ function App() {
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               referrerPolicy="strict-origin-when-cross-origin"
               allowFullScreen
-            ></iframe>
-            <div data-aos="fade-left"
-              data-aos-anchor-placement="bottom-bottom">
+            ></iframe> */}
+            <video
+              data-aos="fade-left"
+              data-aos-anchor-placement="bottom-bottom"
+              className="video rounded-lg bg-cover"
+              autoPlay
+              muted
+              loop
+              playsInline
+            >
+              <source src={video} type="video/mp4" />
+              Tu navegador no soporta el formato de video.
+            </video>
 
-            <Button
-              onClick={openWhatsApp}
-              text="Quiero mi apilador"
-              className="md:hidden mt-8 w-full"
+            <div
+              data-aos="fade-left"
+              data-aos-anchor-placement="bottom-bottom"
+              data-aos-delay="150"
+            >
+              <Button
+                onClick={openWhatsApp}
+                text="Quiero mi apilador"
+                className="md:hidden mt-8 w-full"
               />
-              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -149,22 +188,32 @@ function App() {
         id="contacto"
         className="bg-[#EEEEEE] w-full flex flex-col text-center justify-between"
         style={{
-          height: `${windowHeight}px`, // Usamos la altura dinámica aquí
+          height: `${windowHeight}px`, 
         }}
       >
-        <div className="container mx-auto text-center h-full flex flex-col justify-center items-center p-6">
-          <h2 className="lg:text-4xl text-3xl font-[800] mb-8 text-[#014034] max-w-xl" data-aos="fade-up"
-            data-aos-anchor-placement="bottom-bottom">
+        <div className="container mx-auto text-center h-full flex flex-col justify-center items-center p-6 max-w-xl">
+          <h2
+            className={estilosh2}
+            data-aos="fade-up"
+            data-aos-anchor-placement="bottom-bottom"
+          >
             Sé el próximo en tener el Apilador Velite
           </h2>
-          <p className="text-[#999999] mb-8 max-w-xl" data-aos="fade-up"
-            data-aos-anchor-placement="bottom-bottom">
+          <p
+            className={estilosp}
+            data-aos="fade-up"
+            data-aos-anchor-placement="bottom-bottom"
+          >
             Contáctanos para obtener más información sobre precios y
             disponibilidad del Apilador Eléctrico que está revolucionando la
             manera de trabajar de las empresas que transportan cargas.
           </p>
-          <div data-aos="fade-up"
-            data-aos-anchor-placement="bottom-bottom" className="w-full">
+          <div
+            data-aos="fade-up"
+            data-aos-anchor-placement="bottom-bottom"
+            data-aos-delay="150"
+            className="w-full"
+          >
             <Button text="Contactar ahora" onClick={openWhatsApp} />
           </div>
         </div>
