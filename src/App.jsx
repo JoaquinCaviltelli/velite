@@ -146,6 +146,7 @@ function App() {
               allowFullScreen
             ></iframe> */}
             <video
+              preload="auto"
               data-aos="fade-left"
               data-aos-anchor-placement="bottom-bottom"
               className="video rounded-lg bg-cover"
