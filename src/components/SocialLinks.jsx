@@ -6,7 +6,7 @@ const SocialLinks = () => {
       <h3 className=" mb-8 uppercase font-bold tracking-[0.4em]">
         Seguinos
       </h3>
-      <div className="flex justify-center space-x-10 mb-16 ">
+      <div className="flex justify-center space-x-10 mb-10 ">
         <a
           href="https://www.instagram.com/velite.ok/"
           target="_blank"

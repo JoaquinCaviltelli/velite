@@ -164,7 +164,9 @@ function App() {
               loop
               playsInline
             >
+              
               <source src={video} type="video/mp4" />
+              
               Tu navegador no soporta el formato de video.
             </video>
 
