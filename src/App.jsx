@@ -7,11 +7,13 @@ import Button from "/src/components/Button";
 import bgMobile from "/public/assets/bgMobile.webp";
 import bgDesktop from "/public/assets/bgDesktop.webp";
 import video from "/public/assets/2e4dc237951972f429efee418b7488d6064c1b26.mp4";
+import thumbnail from "/public/assets/capturaVideo.png";
 
 function App() {
   const [bgImage, setBgImage] = useState(bgMobile);
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [videoLoaded, setVideoLoaded] = useState(false); // Estado del video
   const videoRef = useRef(null); // Crear la referencia para el video
 
   const estilosh2 = "lg:text-4xl text-3xl font-[800] mb-8 text-[#014034]";
@@ -156,16 +158,22 @@ function App() {
             </div>
           </div>
           <div className="w-full max-w-xl mx-auto">
+          {!videoLoaded && ( // Mostrar miniatura mientras carga el video
+              <img
+                src={thumbnail}
+                alt="Miniatura del video"
+                className="absolute top-0 left-0 w-full h-full object-cover rounded-lg"
+              />
+            )}
             <video
-              ref={videoRef} // Asignamos la referencia aquí
-              data-aos="fade-left"
-              data-aos-anchor-placement="bottom-bottom"
+              ref={videoRef}
               className="video rounded-lg bg-cover"
               autoPlay
               muted
               loop
               playsInline
-              onClick={handleFullScreen} // Añadimos el manejador de click
+              onClick={handleFullScreen}
+              onLoadedData={() => setVideoLoaded(true)} // Ocultar la miniatura cuando el video carga
             >
               <source src={video} type="video/mp4" />
               Tu navegador no soporta el formato de video.
