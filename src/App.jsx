@@ -157,12 +157,12 @@ function App() {
               />
             </div>
           </div>
-          <div className="w-full max-w-xl mx-auto">
+          <div className="relative w-full max-w-xl mx-auto">
           {!videoLoaded && ( // Mostrar miniatura mientras carga el video
               <img
                 src={thumbnail}
                 alt="Miniatura del video"
-                className="rounded-lg bg-cover"
+                className="absolute video w-full object-cover rounded-lg"
               />
             )}
             <video
