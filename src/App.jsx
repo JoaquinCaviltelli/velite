@@ -10,7 +10,7 @@ import bgDesktop from "/public/assets/bgDesktop.webp";
 function App() {
   const [bgImage, setBgImage] = useState(bgMobile);
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
-  const [imageLoaded, setImageLoaded] = useState(false);
+
 
   const estilosh2 = "lg:text-4xl text-3xl font-[800] mb-8 text-[#014034]";
   const estilosp = "text-[#999999] mb-8";
@@ -61,14 +61,9 @@ function App() {
   useEffect(() => {
     const img = new Image();
     img.src = bgImage;
-    img.onload = () => {
-      setImageLoaded(true);
-    };
   }, [bgImage]);
 
-  if (!imageLoaded) {
-    return null;
-  }
+
 
   return (
     <div>
