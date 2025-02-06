@@ -87,22 +87,19 @@ function App() {
     }
   };
 
-  if (!imageLoaded) {
-    return null;
-  }
+
 
   return (
     <div>
       {/* Sección 1 */}
       <section
         id="/"
-        className="relative bg-cover bg-left"
+        className="relative"    
         style={{
-          backgroundImage: imageLoaded ? `url(${bgImage})` : "none",
           height: `${windowHeight}px`,
-        }}
-        loading="lazy"
+        }}    
       >
+        {imageLoaded && (<img className="bg-cover w-full bg-left bg-no-repeat h-full" src={bgImage} alt=""  />)}
         <div className="absolute inset-0 bg-black opacity-50"></div>
         <div className="absolute inset-0 flex flex-col justify-between text-white w-full max-w-7xl mx-auto p-6">
           <Navbar />
