@@ -162,7 +162,7 @@ function App() {
               <img
                 src={thumbnail}
                 alt="Miniatura del video"
-                className="absolute top-0 left-0 w-full h-full object-cover rounded-lg"
+                className="rounded-lg bg-cover"
               />
             )}
             <video
