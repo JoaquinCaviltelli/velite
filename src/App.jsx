@@ -133,30 +133,7 @@ function App() {
             </div>
           </div>
           <div className="relative w-full max-w-xl mx-auto">
-            {!videoLoaded && ( // Mostrar miniatura mientras carga el video
-              <img
-                data-aos="fade-left"
-                data-aos-anchor-placement="bottom-bottom"
-                src={thumbnail}
-                alt="Miniatura del video"
-                className="absolute video w-full object-cover rounded-lg"
-              />
-            )}
-            <video
-              data-aos="fade-left"
-              data-aos-anchor-placement="bottom-bottom"
-              ref={videoRef}
-              className="video rounded-lg bg-cover"
-              autoPlay
-              muted
-              loop
-              playsInline
-              onClick={handleFullScreen}
-              onLoadedData={() => setVideoLoaded(true)} // Ocultar la miniatura cuando el video carga
-            >
-              <source src={video} type="video/mp4" />
-              Tu navegador no soporta el formato de video.
-            </video>
+            
 
             <div
               data-aos="fade-left"
