@@ -12,7 +12,6 @@ import thumbnail from "/public/assets/capturaVideo.png";
 function App() {
   const [bgImage, setBgImage] = useState(bgMobile);
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
-  const [imageLoaded, setImageLoaded] = useState(false);
   const [videoLoaded, setVideoLoaded] = useState(false); // Estado del video
   const videoRef = useRef(null); // Crear la referencia para el video
 
@@ -62,13 +61,7 @@ function App() {
     return () => window.removeEventListener("resize", updateBgImage);
   }, []);
 
-  useEffect(() => {
-    const img = new Image();
-    img.src = bgImage;
-    img.onload = () => {
-      setImageLoaded(true);
-    };
-  }, [bgImage]);
+ 
 
   const handleFullScreen = () => {
     if (videoRef.current) {
@@ -99,7 +92,7 @@ function App() {
           height: `${windowHeight}px`,
         }}    
       >
-        {imageLoaded && (<img className="object-cover object-left w-full  h-full" src={bgImage} alt="Apilador Eléctrico Autocargable" loading="lazy" />)}
+        <img className="object-cover object-left w-full  h-full" src={bgImage} alt="Apilador Eléctrico Autocargable" loading="lazy" />
         <div className="absolute inset-0 bg-black opacity-50"></div>
         <div className="absolute inset-0 flex flex-col justify-between text-white w-full max-w-7xl mx-auto p-6">
           <Navbar />
