@@ -92,14 +92,17 @@ function App() {
     <div>
       {/* Sección 1 */}
       <section
-        id="/"
-        className="relative bg-cover bg-left"
-        style={{
-          backgroundImage: `url(${bgImage})`,
-          height: `${windowHeight}px`,
-        }}
-        loading="lazy"
-      >
+  id="/"
+  className="relative bg-cover bg-left"
+  style={{
+    backgroundImage: imageLoaded ? `url(${bgImage})` : "none",
+    height: `${windowHeight}px`,
+  }}
+  loading="lazy"
+>
+  {/* Imagen oculta para pre-carga */}
+  {!imageLoaded && <img src={bgImage} className="hidden" alt="Background" />}
+  
         <div className="absolute inset-0 bg-black opacity-50"></div>
         <div className="absolute inset-0 flex flex-col justify-between text-white w-full max-w-7xl mx-auto p-6">
           <Navbar />
