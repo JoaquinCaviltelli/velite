@@ -87,7 +87,9 @@ function App() {
     }
   };
 
-
+  if (!imageLoaded) {
+    return null;
+  }
 
   return (
     <div>
