@@ -6,11 +6,15 @@ import SocialLinks from "/src/components/SocialLinks";
 import Button from "/src/components/Button";
 import bgMobile from "/public/assets/bgMobile.webp";
 import bgDesktop from "/public/assets/bgDesktop.webp";
+import video from "/public/assets/2e4dc237951972f429efee418b7488d6064c1b26.mp4";
+import thumbnail from "/public/assets/capturaVideo.png";
 
 function App() {
   const [bgImage, setBgImage] = useState(bgMobile);
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [videoLoaded, setVideoLoaded] = useState(false); // Estado del video
+  const videoRef = useRef(null); // Crear la referencia para el video
 
   const estilosh2 = "lg:text-4xl text-3xl font-[800] mb-8 text-[#014034]";
   const estilosp = "text-[#999999] mb-8";
@@ -66,7 +70,22 @@ function App() {
     };
   }, [bgImage]);
 
- 
+  const handleFullScreen = () => {
+    if (videoRef.current) {
+      if (videoRef.current.requestFullscreen) {
+        videoRef.current.requestFullscreen();
+      } else if (videoRef.current.mozRequestFullScreen) {
+        // Firefox
+        videoRef.current.mozRequestFullScreen();
+      } else if (videoRef.current.webkitRequestFullscreen) {
+        // Chrome, Safari and Opera
+        videoRef.current.webkitRequestFullscreen();
+      } else if (videoRef.current.msRequestFullscreen) {
+        // IE/Edge
+        videoRef.current.msRequestFullscreen();
+      }
+    }
+  };
 
   if (!imageLoaded) {
     return null;
@@ -141,17 +160,30 @@ function App() {
             </div>
           </div>
           <div className="relative w-full max-w-xl mx-auto">
-          <iframe
+            {!videoLoaded && ( // Mostrar miniatura mientras carga el video
+              <img
+                data-aos="fade-left"
+                data-aos-anchor-placement="bottom-bottom"
+                src={thumbnail}
+                alt="Miniatura del video"
+                className="absolute video w-full object-cover rounded-lg"
+              />
+            )}
+            <video
               data-aos="fade-left"
               data-aos-anchor-placement="bottom-bottom"
+              ref={videoRef}
               className="video rounded-lg bg-cover"
-              src="https://www.youtube.com/embed/YcmrFzPNGmY?autoplay=1&mute=1&loop=1&playlist=YcmrFzPNGmY&controls=0"
-              title="YouTube video player"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-          ></iframe>
+              autoPlay
+              muted
+              loop
+              playsInline
+              onClick={handleFullScreen}
+              onLoadedData={() => setVideoLoaded(true)} // Ocultar la miniatura cuando el video carga
+            >
+              <source src={video} type="video/mp4" />
+              Tu navegador no soporta el formato de video.
+            </video>
 
             <div
               data-aos="fade-left"
