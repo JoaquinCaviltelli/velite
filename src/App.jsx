@@ -74,35 +74,33 @@ function App() {
     if (videoRef.current) {
       if (videoRef.current.requestFullscreen) {
         videoRef.current.requestFullscreen();
-      } else if (videoRef.current.mozRequestFullScreen) { // Firefox
+      } else if (videoRef.current.mozRequestFullScreen) {
+        // Firefox
         videoRef.current.mozRequestFullScreen();
-      } else if (videoRef.current.webkitRequestFullscreen) { // Chrome, Safari and Opera
+      } else if (videoRef.current.webkitRequestFullscreen) {
+        // Chrome, Safari and Opera
         videoRef.current.webkitRequestFullscreen();
-      } else if (videoRef.current.msRequestFullscreen) { // IE/Edge
+      } else if (videoRef.current.msRequestFullscreen) {
+        // IE/Edge
         videoRef.current.msRequestFullscreen();
       }
     }
   };
 
-  if (!imageLoaded) {
-    return null;
-  }
+
 
   return (
     <div>
       {/* Sección 1 */}
       <section
-  id="/"
-  className="relative bg-cover bg-left"
-  style={{
-    backgroundImage: imageLoaded ? `url(${bgImage})` : "none",
-    height: `${windowHeight}px`,
-  }}
-  loading="lazy"
->
-  {/* Imagen oculta para pre-carga */}
-  {!imageLoaded && <img src={bgImage} className="hidden" alt="Background" />}
-  
+        id="/"
+        className="relative bg-cover bg-left"
+        style={{
+          backgroundImage: imageLoaded ? `url(${bgImage})` : "none",
+          height: `${windowHeight}px`,
+        }}
+        loading="lazy"
+      >
         <div className="absolute inset-0 bg-black opacity-50"></div>
         <div className="absolute inset-0 flex flex-col justify-between text-white w-full max-w-7xl mx-auto p-6">
           <Navbar />
@@ -161,17 +159,17 @@ function App() {
             </div>
           </div>
           <div className="relative w-full max-w-xl mx-auto">
-          {!videoLoaded && ( // Mostrar miniatura mientras carga el video
+            {!videoLoaded && ( // Mostrar miniatura mientras carga el video
               <img
-              data-aos="fade-left"
-              data-aos-anchor-placement="bottom-bottom"
+                data-aos="fade-left"
+                data-aos-anchor-placement="bottom-bottom"
                 src={thumbnail}
                 alt="Miniatura del video"
                 className="absolute video w-full object-cover rounded-lg"
               />
             )}
             <video
-            data-aos="fade-left"
+              data-aos="fade-left"
               data-aos-anchor-placement="bottom-bottom"
               ref={videoRef}
               className="video rounded-lg bg-cover"
