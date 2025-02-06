@@ -51,7 +51,7 @@ const Navbar = () => {
           </button>
         </div>
         <div className="h-full flex flex-col justify-between">
-          <ul className="flex flex-col items-center space-y-10 uppercase font-medium text-xl mt-28 tracking-[0.3em]">
+          <ul className="flex flex-col items-center space-y-6 uppercase font-medium text-lg mt-28 tracking-[0.3em]">
             <li>
               <a
                 href="#apilador-electrico"
