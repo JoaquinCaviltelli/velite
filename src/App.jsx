@@ -99,7 +99,7 @@ function App() {
           height: `${windowHeight}px`,
         }}    
       >
-        {imageLoaded && (<img className="object-cover object-left w-full  h-full" src={bgImage} alt=""  />)}
+        {imageLoaded && (<img className="object-cover object-left w-full  h-full" src={bgImage} alt="Apilador Eléctrico Autocargable" loading="lazy" />)}
         <div className="absolute inset-0 bg-black opacity-50"></div>
         <div className="absolute inset-0 flex flex-col justify-between text-white w-full max-w-7xl mx-auto p-6">
           <Navbar />
