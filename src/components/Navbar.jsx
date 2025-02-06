@@ -46,12 +46,12 @@ const Navbar = () => {
         }`}
       >
         <div className="flex justify-end">
-          <button onClick={toggleSidebar} className="text-white text-2xl">
+          <button onClick={toggleSidebar} className="text-white text-2xl p-2">
             <i className="fas fa-times"></i>
           </button>
         </div>
         <div className="h-full flex flex-col justify-between">
-          <ul className="flex flex-col items-center space-y-4 uppercase font-semibold text-lg mt-20">
+          <ul className="flex flex-col items-center space-y-10 uppercase font-medium text-xl mt-28 tracking-[0.3em]">
             <li>
               <a
                 href="#apilador-electrico"
