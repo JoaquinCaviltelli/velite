@@ -4,7 +4,7 @@ import "aos/dist/aos.css";
 import Navbar from "/src/components/Navbar";
 import SocialLinks from "/src/components/SocialLinks";
 import Button from "/src/components/Button";
-import bgMobile from "/public/assets/bgMobile_11zon.jpg";
+import bgMobile from "/public/assets/bgMobile.webp";
 import bgDesktop from "/public/assets/bgDesktop.webp";
 
 function App() {
