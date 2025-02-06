@@ -10,7 +10,7 @@ import video from "/public/assets/2e4dc237951972f429efee418b7488d6064c1b26.mp4";
 import thumbnail from "/public/assets/capturaVideo.png";
 
 function App() {
-  const [bgImage, setBgImage] = useState(bgDesktop);
+  const [bgImage, setBgImage] = useState(bgMobile);
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
   const [videoLoaded, setVideoLoaded] = useState(false); // Estado del video
   const videoRef = useRef(null); // Crear la referencia para el video
