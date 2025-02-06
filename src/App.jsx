@@ -4,12 +4,15 @@ import "aos/dist/aos.css";
 import Navbar from "/src/components/Navbar";
 import SocialLinks from "/src/components/SocialLinks";
 import Button from "/src/components/Button";
+import bgMobile from "/public/assets/bgMobile.webp";
 import bgDesktop from "/public/assets/bgDesktop.webp";
 import video from "/public/assets/2e4dc237951972f429efee418b7488d6064c1b26.mp4";
 import thumbnail from "/public/assets/capturaVideo.png";
 
 function App() {
+  const [bgImage, setBgImage] = useState(bgMobile);
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
+  const [imageLoaded, setImageLoaded] = useState(false);
   const [videoLoaded, setVideoLoaded] = useState(false); // Estado del video
   const videoRef = useRef(null); // Crear la referencia para el video
 
@@ -44,9 +47,28 @@ function App() {
     window.open(url, "_blank");
   };
 
+  useEffect(() => {
+    const updateBgImage = () => {
+      if (window.innerWidth >= 768) {
+        setBgImage(bgDesktop);
+      } else {
+        setBgImage(bgMobile);
+      }
+    };
 
+    updateBgImage();
 
- 
+    window.addEventListener("resize", updateBgImage);
+    return () => window.removeEventListener("resize", updateBgImage);
+  }, []);
+
+  useEffect(() => {
+    const img = new Image();
+    img.src = bgImage;
+    img.onload = () => {
+      setImageLoaded(true);
+    };
+  }, [bgImage]);
 
   const handleFullScreen = () => {
     if (videoRef.current) {
@@ -77,7 +99,7 @@ function App() {
           height: `${windowHeight}px`,
         }}    
       >
-        <img className="object-cover object-left w-full  h-full" src={bgDesktop} alt="Apilador Eléctrico Autocargable" loading="lazy" />
+        <img className="object-cover object-left w-full  h-full" src={bgImage} alt="Apilador Eléctrico Autocargable" loading="lazy" />
         <div className="absolute inset-0 bg-black opacity-50"></div>
         <div className="absolute inset-0 flex flex-col justify-between text-white w-full max-w-7xl mx-auto p-6">
           <Navbar />
