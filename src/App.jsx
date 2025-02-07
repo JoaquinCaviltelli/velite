@@ -1,18 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Navbar from "/src/components/Navbar";
 import SocialLinks from "/src/components/SocialLinks";
 import Button from "/src/components/Button";
-import bgMobile from "/public/assets/bgMobile.webp";
+import bgMobile from "/assets/bgMobile.webp";
 import bgDesktop from "/assets/bgDesktop.webp";
+import video from "/assets/2e4dc237951972f429efee418b7488d6064c1b26.mp4";
+import thumbnail from "/assets/capturaVideo.png";
 
 function App() {
   const [bgImage, setBgImage] = useState(bgMobile);
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [videoLoaded, setVideoLoaded] = useState(false); // Estado del video
+  const videoRef = useRef(null); // Crear la referencia para el video
 
+  const estilosh2 = "lg:text-4xl text-3xl font-[800] mb-8 text-[#014034]";
+  const estilosp = "text-[#999999] mb-8";
 
+  // Calcular altura de la ventana
   useEffect(() => {
     const updateHeight = () => {
       setWindowHeight(window.innerHeight);
@@ -63,10 +70,25 @@ function App() {
     };
   }, [bgImage]);
 
-
+  const handleFullScreen = () => {
+    if (videoRef.current) {
+      if (videoRef.current.requestFullscreen) {
+        videoRef.current.requestFullscreen();
+      } else if (videoRef.current.mozRequestFullScreen) {
+        // Firefox
+        videoRef.current.mozRequestFullScreen();
+      } else if (videoRef.current.webkitRequestFullscreen) {
+        // Chrome, Safari and Opera
+        videoRef.current.webkitRequestFullscreen();
+      } else if (videoRef.current.msRequestFullscreen) {
+        // IE/Edge
+        videoRef.current.msRequestFullscreen();
+      }
+    }
+  };
 
   if (!imageLoaded) {
-    return 
+    return null;
   }
 
   return (
@@ -111,14 +133,14 @@ function App() {
         <div className="container mx-auto flex items-center justify-center h-full md:gap-20 w-full max-w-7xl md:items-center p-6 md:flex-row flex-col">
           <div className="flex flex-col w-full max-w-xl mx-auto">
             <h2
-              className="lg:text-4xl text-3xl font-[800] mb-8 text-[#014034]"
+              className={estilosh2}
               data-aos="fade-right"
               data-aos-anchor-placement="bottom-bottom"
             >
               Descubrí el poder del Apilador Eléctrico Autocargable Velite®
             </h2>
             <p
-              className="text-[#999999] mb-8"
+              className={estilosp}
               data-aos="fade-right"
               data-aos-anchor-placement="bottom-bottom"
             >
@@ -138,7 +160,30 @@ function App() {
             </div>
           </div>
           <div className="relative w-full max-w-xl mx-auto">
-          <iframe width="560" height="315" src="https://www.youtube.com/embed/YcmrFzPNGmY?si=XktjLrgLT9UFTF33&amp;controls=0" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            {!videoLoaded && ( // Mostrar miniatura mientras carga el video
+              <img
+                data-aos="fade-left"
+                data-aos-anchor-placement="bottom-bottom"
+                src={thumbnail}
+                alt="Miniatura del video"
+                className="absolute video w-full object-cover rounded-lg"
+              />
+            )}
+            <video
+              data-aos="fade-left"
+              data-aos-anchor-placement="bottom-bottom"
+              ref={videoRef}
+              className="video rounded-lg bg-cover"
+              autoPlay
+              muted
+              loop
+              playsInline
+              onClick={handleFullScreen}
+              onLoadedData={() => setVideoLoaded(true)} // Ocultar la miniatura cuando el video carga
+            >
+              <source src={video} type="video/mp4" />
+              Tu navegador no soporta el formato de video.
+            </video>
 
             <div
               data-aos="fade-left"
@@ -165,14 +210,14 @@ function App() {
       >
         <div className="container mx-auto text-center h-full flex flex-col justify-center items-center p-6 max-w-xl">
           <h2
-            className="lg:text-4xl text-3xl font-[800] mb-8 text-[#014034]"
+            className={estilosh2}
             data-aos="fade-up"
             data-aos-anchor-placement="bottom-bottom"
           >
             Sé el próximo en tener el Apilador Velite
           </h2>
           <p
-            className="text-[#999999] mb-8"
+            className={estilosp}
             data-aos="fade-up"
             data-aos-anchor-placement="bottom-bottom"
           >
