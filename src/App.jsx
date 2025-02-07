@@ -141,7 +141,7 @@ function App() {
           </div>
           <div className="relative w-full max-w-xl mx-auto">
            
-            <iframe
+            {/* <iframe
               data-aos="fade-left"
               data-aos-anchor-placement="bottom-bottom"
               className="video rounded-lg bg-cover"
@@ -150,7 +150,7 @@ function App() {
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               referrerPolicy="strict-origin-when-cross-origin"
-            ></iframe>
+            ></iframe> */}
 
             <div
               data-aos="fade-left"
