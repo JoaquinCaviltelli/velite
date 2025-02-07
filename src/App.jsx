@@ -5,7 +5,7 @@ import Navbar from "/src/components/Navbar";
 import SocialLinks from "/src/components/SocialLinks";
 import Button from "/src/components/Button";
 // import bgMobile from "/public/assets/bgMobile.webp";
-import bgDesktop from "/public/assets/bgDesktop.webp";
+import bgDesktop from "/assets/bgDesktop.webp";
 
 function App() {
   // const [bgImage, setBgImage] = useState(bgMobile);

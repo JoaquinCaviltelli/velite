@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import SocialLinks from "/src/components/SocialLinks";
-import logo from "/public/assets/logo.png";
+import logo from "/assets/logo.png";
 
 const Navbar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
