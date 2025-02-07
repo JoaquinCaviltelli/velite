@@ -4,13 +4,13 @@ import "aos/dist/aos.css";
 import Navbar from "/src/components/Navbar";
 import SocialLinks from "/src/components/SocialLinks";
 import Button from "/src/components/Button";
-// import bgMobile from "/public/assets/bgMobile.webp";
+import bgMobile from "/public/assets/bgMobile.webp";
 import bgDesktop from "/assets/bgDesktop.webp";
 
 function App() {
-  // const [bgImage, setBgImage] = useState(bgMobile);
+  const [bgImage, setBgImage] = useState(bgMobile);
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
-  // const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
 
   useEffect(() => {
@@ -40,34 +40,34 @@ function App() {
     window.open(url, "_blank");
   };
 
-  // useEffect(() => {
-  //   const updateBgImage = () => {
-  //     if (window.innerWidth >= 768) {
-  //       setBgImage(bgDesktop);
-  //     } else {
-  //       setBgImage(bgMobile);
-  //     }
-  //   };
+  useEffect(() => {
+    const updateBgImage = () => {
+      if (window.innerWidth >= 768) {
+        setBgImage(bgDesktop);
+      } else {
+        setBgImage(bgMobile);
+      }
+    };
 
-  //   updateBgImage();
+    updateBgImage();
 
-  //   window.addEventListener("resize", updateBgImage);
-  //   return () => window.removeEventListener("resize", updateBgImage);
-  // }, []);
+    window.addEventListener("resize", updateBgImage);
+    return () => window.removeEventListener("resize", updateBgImage);
+  }, []);
 
-  // useEffect(() => {
-  //   const img = new Image();
-  //   img.src = bgImage;
-  //   img.onload = () => {
-  //     setImageLoaded(true);
-  //   };
-  // }, [bgImage]);
+  useEffect(() => {
+    const img = new Image();
+    img.src = bgImage;
+    img.onload = () => {
+      setImageLoaded(true);
+    };
+  }, [bgImage]);
 
 
 
-  // if (!imageLoaded) {
-  //   return null;
-  // }
+  if (!imageLoaded) {
+    return null;
+  }
 
   return (
     <div>
@@ -79,7 +79,7 @@ function App() {
           height: `${windowHeight}px`,
         }}    
       >
-        <img className="object-cover object-left w-full  h-full" src={bgDesktop} alt="Apilador Eléctrico Autocargable" loading="lazy" />
+        <img className="object-cover object-left w-full  h-full" src={bgImage} alt="Apilador Eléctrico Autocargable" loading="lazy" />
         <div className="absolute inset-0 bg-black opacity-50"></div>
         <div className="absolute inset-0 flex flex-col justify-between text-white w-full max-w-7xl mx-auto p-6">
           <Navbar />
