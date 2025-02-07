@@ -66,12 +66,7 @@ function App() {
 
 
   if (!imageLoaded) {
-    return (
-      <div className="w-full bg-red-500" style={{
-        height: `${windowHeight}px`,
-      }} >
-      </div>
-    )
+    return 
   }
 
   return (
@@ -143,17 +138,7 @@ function App() {
             </div>
           </div>
           <div className="relative w-full max-w-xl mx-auto">
-          <iframe
-              data-aos="fade-left"
-              data-aos-anchor-placement="bottom-bottom"
-              className="video rounded-lg bg-cover"
-              src="https://www.youtube.com/embed/YcmrFzPNGmY?autoplay=1&mute=1&loop=1&playlist=YcmrFzPNGmY&controls=0"
-              title="YouTube video player"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-          ></iframe>
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/YcmrFzPNGmY?si=XktjLrgLT9UFTF33&amp;controls=0" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
             <div
               data-aos="fade-left"
