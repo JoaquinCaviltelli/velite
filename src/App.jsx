@@ -141,16 +141,17 @@ function App() {
           </div>
           <div className="relative w-full max-w-xl mx-auto">
            
-            {/* <iframe
+            <iframe
               data-aos="fade-left"
               data-aos-anchor-placement="bottom-bottom"
               className="video rounded-lg bg-cover"
-              src="https://www.youtube.com/embed/cyBuLgkB5zA?si=UUZf775dsdHTq6nk&mute=1&loop=1&playlist=cyBuLgkB5zA"
+              src="https://www.youtube.com/embed/cyBuLgkB5zA?si=UUZf775dsdHTq6nk&amp;autoplay=1&mute=1&loop=1&playlist=cyBuLgkB5zA"
               title="YouTube video player"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               referrerPolicy="strict-origin-when-cross-origin"
-            ></iframe> */}
+              allowFullScreen
+            ></iframe>
 
             <div
               data-aos="fade-left"
