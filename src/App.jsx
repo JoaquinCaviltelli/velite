@@ -1,26 +1,12 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Navbar from "/src/components/Navbar";
 import SocialLinks from "/src/components/SocialLinks";
 import Button from "/src/components/Button";
-import bgMobile from "/assets/bgMobile.webp";
 import bgDesktop from "/assets/bgDesktop.webp";
 
 function App() {
-  const [bgImage, setBgImage] = useState(bgMobile);
-  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
-  const [imageLoaded, setImageLoaded] = useState(false);
-
-  useEffect(() => {
-    const updateHeight = () => {
-      setWindowHeight(window.innerHeight);
-    };
-    window.addEventListener("resize", updateHeight);
-    return () => {
-      window.removeEventListener("resize", updateHeight);
-    };
-  }, []);
 
   useEffect(() => {
     AOS.init({
@@ -39,32 +25,7 @@ function App() {
     window.open(url, "_blank");
   };
 
-  useEffect(() => {
-    const updateBgImage = () => {
-      if (window.innerWidth >= 768) {
-        setBgImage(bgDesktop);
-      } else {
-        setBgImage(bgMobile);
-      }
-    };
-
-    updateBgImage();
-
-    window.addEventListener("resize", updateBgImage);
-    return () => window.removeEventListener("resize", updateBgImage);
-  }, []);
-
-  useEffect(() => {
-    const img = new Image();
-    img.src = bgImage;
-    img.onload = () => {
-      setImageLoaded(true);
-    };
-  }, [bgImage]);
-
-  if (!imageLoaded) {
-    return <></>;
-  }
+ 
 
   return (
     <div>
@@ -73,12 +34,12 @@ function App() {
         id="/"
         className="relative"
         style={{
-          height: `${windowHeight}px`,
+          height: `${window.innerHeight}px`,
         }}
       >
         <img
-          className="object-cover object-left w-full  h-full"
-          src={bgImage}
+          className="object-cover bg w-full  h-full"
+          src={bgDesktop}
           alt="Apilador Eléctrico Autocargable"
           loading="lazy"
         />
@@ -107,7 +68,7 @@ function App() {
         id="apilador-electrico"
         className="bg-white w-full  overflow-hidden"
         style={{
-          height: `${windowHeight}px`,
+          height: `${window.innerHeight}px`,
         }}
       >
         <div className="container mx-auto flex items-center justify-center h-full md:gap-20 w-full max-w-7xl md:items-center p-6 md:flex-row flex-col">
@@ -173,7 +134,7 @@ function App() {
         id="contacto"
         className="bg-[#EEEEEE] w-full flex flex-col text-center justify-between"
         style={{
-          height: `${windowHeight}px`,
+          height: `${window.innerHeight}px`,
         }}
       >
         <div className="container mx-auto text-center h-full flex flex-col justify-center items-center p-6 max-w-xl">

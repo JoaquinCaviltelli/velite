@@ -13,3 +13,16 @@
 html {
   scroll-behavior: smooth;
 }
+
+/* Estilo para pantallas grandes */
+.bg {
+  object-position: left;
+  /* Otros estilos que necesites */
+}
+
+/* Estilo para pantallas más pequeñas */
+@media (max-width: 1020px) {
+  .bg {
+    object-position: calc(0% - 220px) 50%; /* Ajusta 20px hacia la derecha */
+  }
+}
